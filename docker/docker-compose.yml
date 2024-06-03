@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  rtsp-server:
+    container_name: "rtsp-server"
+    build: .
+    networks:
+      - rtsp-net
+    volumes:
+      - ../:/rtsp-server
+    environment:
+      - MP4_FILENAME=workout.mp4
+      - DST_STREAM=stream1
+    tty: true
+    stdin_open: true
+    privileged: true
+    ports:
+      - "8554:8554"
+      - "8000:8000"
+
+networks:
+  rtsp-net:
+    driver: bridge
